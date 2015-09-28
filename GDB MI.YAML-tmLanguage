@@ -1,0 +1,181 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+#
+# author: Philippe Proulx <eepp.ca>
+---
+name: GDB MI
+scopeName: source.gdb-mi
+fileTypes: ['gdb-mi', 'gdb']
+uuid: 32d70691-1958-4f86-81ed-2d331211f4a0
+patterns:
+  - include: '#gdb-prompt'
+  - include: '#out-of-band-record'
+  - include: '#result-record'
+  - include: '#command'
+repository:
+  comma:
+    name: punctuation.comma.gdb-mi
+    match: ','
+  cstring:
+    name: string.quoted.double.gdb-mi
+    begin: '"'
+    end: '"'
+    patterns:
+      - name: constant.character.escape.gdb-mi
+        match: \\.
+  tuple:
+    name: meta.tuple.gdb-mi
+    begin: \{
+    end: \}
+    beginCaptures:
+      '0':
+        name: keyword.operator.begin-tuple.gdb-mi
+    endCaptures:
+      '0':
+        name: keyword.operator.end-tuple.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#result'
+  list:
+    name: meta.list.gdb-mi
+    begin: \[
+    end: \]
+    beginCaptures:
+      '0':
+        name: keyword.operator.begin-list.gdb-mi
+    endCaptures:
+      '0':
+        name: keyword.operator.end-list.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#value'
+      - include: '#result'
+  value:
+    name: meta.value.gdb-mi
+    patterns:
+      - include: '#cstring'
+      - include: '#list'
+      - include: '#tuple'
+  result:
+    name: meta.result.gdb-mi
+    begin: ([a-zA-Z_-][a-zA-Z0-9_-]*)\s*(=)
+    end: (?=[,\]\}]|^\(gdb\)\s*$|$)
+    beginCaptures:
+      '1':
+        name: variable.other.gdb-mi
+      '2':
+        name: keyword.operator.gdb-mi
+    patterns:
+      - include: '#value'
+  result-record:
+    name: meta.result-record.gdb-mi
+    begin: ^(\d*)(\^)(done|running|connected|error|exit)
+    end: (?=^\(gdb\)\s*$|$)
+    beginCaptures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+      '2':
+        name: keyword.operator.begin-record.gdb-mi
+      '3':
+        name: keyword.control.result-record-type.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#result'
+  console-stream-output:
+    name: meta.stream-output.gdb-mi
+    begin: ^(\~)
+    end: $
+    beginCaptures:
+      '1':
+        name: keyword.operator.begin-console-stream-output.gdb-mi
+    patterns:
+      - include: '#cstring'
+  target-stream-output:
+    name: meta.stream-output.gdb-mi
+    begin: ^(\@)
+    end: $
+    beginCaptures:
+      '1':
+        name: keyword.operator.begin-target-stream-output.gdb-mi
+    patterns:
+      - include: '#cstring'
+  log-stream-output:
+    name: meta.stream-output.gdb-mi
+    begin: ^(&)
+    end: $
+    beginCaptures:
+      '1':
+        name: keyword.operator.begin-log-stream-output.gdb-mi
+    patterns:
+      - include: '#cstring'
+  notify-async-record:
+    name: meta.async-record.gdb-mi
+    begin: ^(\d*)(=)([a-zA-Z][a-zA-Z0-9_-]*)
+    end: $
+    beginCaptures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+      '2':
+        name: keyword.operator.begin-record.gdb-mi
+      '3':
+        name: variable.other.async-class.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#result'
+  status-async-record:
+    name: meta.async-record.gdb-mi
+    begin: ^(\d*)(\+)([a-zA-Z][a-zA-Z0-9_-]*)
+    end: $
+    beginCaptures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+      '2':
+        name: keyword.operator.begin-record.gdb-mi
+      '3':
+        name: variable.other.async-class.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#result'
+  exec-async-record:
+    name: meta.async-record.gdb-mi
+    begin: ^(\d*)(\*)([a-zA-Z][a-zA-Z0-9_-]*)
+    end: $
+    beginCaptures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+      '2':
+        name: keyword.operator.begin-record.gdb-mi
+      '3':
+        name: variable.other.async-class.gdb-mi
+    patterns:
+      - include: '#comma'
+      - include: '#result'
+  out-of-band-record:
+    name: meta.out-of-band-record.gdb-mi
+    patterns:
+      - include: '#console-stream-output'
+      - include: '#target-stream-output'
+      - include: '#log-stream-output'
+      - include: '#notify-async-record'
+      - include: '#status-async-record'
+      - include: '#exec-async-record'
+  command:
+    name: meta.command.gdb-mi
+    patterns:
+      - include: '#mi-command'
+      - include: '#cli-command'
+  cli-command:
+    name: meta.command.cli.gdb-mi
+    match: ^\s*(\d*)[^\^\~\@&=+*-].*$
+    captures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+  mi-command:
+    name: meta.command.mi.gdb-mi
+    match: ^\s*(\d*)-.*$
+    captures:
+      '1':
+        name: constant.numeric.token.gdb-mi
+  gdb-prompt:
+    name: entity.name.tag.prompt.gdb-mi
+    match: ^(\(gdb\))\s*$
+...

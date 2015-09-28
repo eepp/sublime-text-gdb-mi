@@ -1,0 +1,117 @@
+<!-- GDB MI specifics -->
+
+<!-- lighter foreground for commands -->
+<dict>
+  <key>scope</key>
+  <string>source.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#d0d0d0</string>
+  </dict>
+</dict>
+
+<!-- token -->
+<dict>
+  <key>scope</key>
+  <string>constant.numeric.token.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#b0b0b0</string>
+    <key>background</key>
+    <string>#434343</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+
+<!-- stream output -->
+<dict>
+  <key>scope</key>
+  <string>meta.stream-output.gdb-mi keyword.operator</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#71d9d5</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+<dict>
+  <key>scope</key>
+  <string>meta.stream-output.gdb-mi string</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#787878</string>
+  </dict>
+</dict>
+<dict>
+  <key>scope</key>
+  <string>meta.stream-output.gdb-mi string constant.character.escape</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#878787</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+
+<!-- async record -->
+<dict>
+  <key>scope</key>
+  <string>meta.async-record.gdb-mi keyword.operator.begin-record.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#d9bc5f</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+<dict>
+  <key>scope</key>
+  <string>variable.other.async-class.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#dfc678</string>
+  </dict>
+</dict>
+
+<!-- result record -->
+<dict>
+  <key>scope</key>
+  <string>meta.result-record.gdb-mi keyword.operator.begin-record.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#ca79d9</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+<dict>
+  <key>scope</key>
+  <string>keyword.control.result-record-type.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#ca79d9</string>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
+
+<!-- prompt -->
+<dict>
+  <key>scope</key>
+  <string>entity.name.tag.prompt.gdb-mi</string>
+  <key>settings</key>
+  <dict>
+    <key>fontStyle</key>
+    <string>bold</string>
+  </dict>
+</dict>
